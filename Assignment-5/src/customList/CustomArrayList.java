@@ -3,31 +3,36 @@ package customList;
 import java.util.Arrays;
 
 public class CustomArrayList<T> implements CustomList<T> {
-	Object[] items = new Object[10];
+	Object[] aItems = new Object[10];
 	int iCount = 0;
 
 	@Override
 	public boolean add(T item) {
-		for (int i = 0; i < items.length; i++) {
-			if (items[i] == (null)) {
-				items[i] = item;
-				return true;
-			} else if (items[items.length - 1] != null) {
-				items = Arrays.copyOf(items, items.length * 2);
+		for (int i = 0; i < aItems.length; i++) {
+			if (aItems[aItems.length - 1] != null) {
+				aItems = Arrays.copyOf(aItems, aItems.length * 2);
 			}
+			else if (aItems[i] == null) {
+				aItems[i] = item;
+				return true;
+			} 
 		}
 		return false;
 	}
 
 	@Override
 	public int getSize() {
-		return items.length;
+		int i = 0;
+		while (i < aItems.length && aItems[i] != null) {
+			i++;
+		}
+		return i;
 	}
 
 	@Override
 	public T get(int index) {
 		@SuppressWarnings("unchecked")
-		T item = (T) items[index];
+		T item = (T) aItems[index];
 		return item;
 	}
 }
